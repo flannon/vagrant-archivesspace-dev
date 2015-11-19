@@ -24,6 +24,7 @@ node default {
   #}
 
   include java
+  #include jruby
   include motd
   class { 'python' :
     version => 'system',

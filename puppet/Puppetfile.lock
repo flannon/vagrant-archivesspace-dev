@@ -3,6 +3,7 @@ FORGE
   specs:
     example42-puppi (2.1.12)
     golja-gnupg (1.2.1)
+    jlbfalcao-jruby (1.7.11)
     maestrodev-rvm (1.12.1)
       golja-gnupg (>= 1.2.0)
       puppetlabs-stdlib (>= 4.2.0)
@@ -71,6 +72,7 @@ DEPENDENCIES
   flannon-housekeeping (>= 0)
   flannon-motd (>= 0)
   flannon-vim (>= 0)
+  jlbfalcao-jruby (>= 0)
   maestrodev-rvm (>= 0)
   puppetlabs-firewall (>= 0)
   puppetlabs-java (>= 0)

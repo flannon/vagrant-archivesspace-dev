@@ -14,6 +14,8 @@ Vagrant.configure(2) do |config|
     #vb.gui = true
     #vb.memory = "2048"
   end
+  config.vm.network "forwarded_port", guest:  3000, host: 3100
+  config.vm.network "forwarded_port", guest:  3100, host: 3200
   config.vm.network "forwarded_port", guest:  3306, host: 3406
   config.vm.network "forwarded_port", guest:  8080, host: 8180
   config.vm.network "forwarded_port", guest:  8081, host: 8181

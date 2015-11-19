@@ -13,6 +13,7 @@ mod 'flannon/vim', :path => './modules-local/vim'
 # Modules from the Puppet Forge
 mod 'stahnma/epel', "1.1.1"
 mod 'puppetlabs/java'
+mod 'jlbfalcao/jruby'
 mod 'puppetlabs/mysql'
 mod 'example42/puppi'
 mod 'stankevich/python'
