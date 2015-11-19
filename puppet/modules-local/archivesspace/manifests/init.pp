@@ -37,41 +37,67 @@
 #
 class archivesspace (
   $version = '1.4.1',
-  $install_location = '/usr/local/archivesspace'
+  $install_dir = '/opt/archivesspace',
+  $install_type = 'prod',
+  $branch = 'master'
 ) {
-
-    puppi::netinstall { 'netinstall-archivesspace':
-      #url                 => 'https://github.com/archivesspace/archivesspace/releases/download/v1.4.1/archivesspace-v1.4.1.zip',
-      url                 => "https://github.com/archivesspace/archivesspace/releases/download/v${version}/archivesspace-v${version}.zip",
-      extracted_dir       => 'archivesspace',
-      destination_dir     => '/tmp',
-      postextract_command => 'mv -f /tmp/archivesspace /usr/local/archivesspace  ',
+  #if $install_type == 'production' {
+  #  puppi::netinstall { 'netinstall-archivesspace':
+  #    url => "https://github.com/archivesspace/archivesspace/archive/master.zip",
+  #    extracted_dir       => 'archivesspace',
+  #    destination_dir     => '/tmp',
+  #    #postextract_command => "mv -f /tmp/${extracted_dir} ${install_dir}",
+  #    postextract_command => "mv -f /tmp/archivesspace ${install_dir}",
+  #  }
+  #}
+  if $install_type == 'dev' {
+    #vcsrepo { "${install_dir}/${repo}":
+    vcsrepo { '/opt/archivesspace':
+      ensure    => latest,
+      owner     => 'root',
+      group     => 'root',
+      provider  => git,
+      require   => [ Package [ 'git' ] ],
+      #source    => 'git@github.com:/archivesspace/archivesspace.git',
+      #source    => 'https://github.com/archivesspace/archivesspace.git',
+      #source    => 'git://github.com/archivesspace/archivesspace',
+      source    => 'git://github.com/NYULibraries/archivesspace.git',
+      #revision => 'master',
+      #notify    => File['/opt/archivesspace'],
     }
-
-  file { '/usr/local/archivesspace/lib/mysql-connector-java-5.1.34.jar':
-    ensure  => file,
-    source  => 'puppet:///modules/archivesspace/mysql-connector-java-5.1.34.jar',
-    #require => File['/usr/local/archivesspace'],
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => Puppi::Netinstall['netinstall-archivesspace'],
   }
 
-  file { '/usr/local/archivesspace/config/config.rb':
-    ensure   => file,
-    source   => 'puppet:///modules/archivesspace/config.rb',
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0644',
-    require  => Puppi::Netinstall['netinstall-archivesspace'],
+  file { "${install_dir}/" :
+    ensure  => directory,
+    recurse => true,
+    owner   => 'vagrant',
+    group   => 'vagrant',
   }
+
+    #file { "${install_location}/lib/mysql-connector-java-5.1.34.jar":
+    #ensure  => file,
+    #source  => 'puppet:///modules/archivesspace/mysql-connector-java-5.1.34.jar',
+    ##require => File['/usr/local/archivesspace'],
+    #owner   => 'root',
+    #group   => 'root',
+    #mode    => '0644',
+    #require => Puppi::Netinstall['netinstall-archivesspace'],
+    #}
+
+    #file { "${install_location}/config/config.rb":
+    #ensure   => file,
+    #source   => 'puppet:///modules/archivesspace/config.rb',
+    #owner    => 'root',
+    #group    => 'root',
+    #mode     => '0644',
+    #require  => Puppi::Netinstall['netinstall-archivesspace'],
+    #}
 
   # Link to the startup script
-  file { '/etc/init.d/archivesspace':
-    ensure  => link,
-    target  => '/usr/local/archivesspace/archivesspace.sh',
-  }
+  #file { '/etc/init.d/archivesspace':
+  #  ensure  => link,
+  #  target  => "${install_locaiton}/archivesspace.sh',
+  #}
 
 
   ## To get the setup-database.sh script to work I had to run it

@@ -94,18 +94,20 @@ node default {
   #  postextract_command => 'mv -f /tmp/archivesspace /usr/local/archivesspace',
   #}
   class { 'archivesspace':
-    version    => '1.4.2',
-    #require    => Class['housekeeping'],
-    require    => Package['unzip'],
-    #  require => Puppi::Netinstall['netinstall-archivesspace'],
-    #creates   => '/usr/local/archivesspace/archivesspace',
+    #version     => '1.4.2',
+    #require     => Class['housekeeping'],
+    install_type => dev,
+    #require      => [ Package['unzip'], Class['vcsrepo'] ],
+    require      =>  Package['unzip'],
+    #  require   => Puppi::Netinstall['netinstall-archivesspace'],
+    #creates     => '/usr/local/archivesspace/archivesspace',
   }
   firewall { '100 allow archivesspace access':
-    port   => [8080, 8081, 8089, 8090, 8091],
+    dport   => [8080, 8081, 8089, 8090, 8091],
     proto  => tcp,
     action => accept,
   }
-  
+
   include vim
-  
+
 }

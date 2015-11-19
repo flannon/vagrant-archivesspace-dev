@@ -13,8 +13,9 @@ FORGE
       nanliu-staging (< 2.0.0, >= 1.0.1)
       puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
     puppetlabs-stdlib (4.9.0)
+    puppetlabs-vcsrepo (1.3.1)
     stahnma-epel (1.1.1)
-    stankevich-python (1.9.8)
+    stankevich-python (1.10.0)
       puppetlabs-stdlib (< 6.0.0, >= 4.6.0)
       stahnma-epel (< 2.0.0, >= 1.0.1)
 
@@ -37,8 +38,8 @@ PATH
   remote: ./modules-local/archivesspace
   specs:
     flannon-archivesspace (0.1.0)
-      example42-puppi (>= 2.1.12)
       puppetlabs-stdlib (>= 1.0.0)
+      puppetlabs-vcsrepo (>= 1.3.1)
 
 PATH
   remote: ./modules-local/fw
@@ -75,6 +76,7 @@ DEPENDENCIES
   puppetlabs-java (>= 0)
   puppetlabs-mysql (>= 0)
   puppetlabs-stdlib (= 4.9.0)
+  puppetlabs-vcsrepo (>= 0)
   stahnma-epel (= 1.1.1)
   stankevich-python (>= 0)
   yguenane-repoforge (>= 0)

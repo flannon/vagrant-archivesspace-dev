@@ -18,6 +18,7 @@ mod 'example42/puppi'
 mod 'stankevich/python'
 mod 'maestrodev/rvm'
 mod 'puppetlabs/stdlib', "4.9.0"
+mod 'puppetlabs/vcsrepo'
 #mod 'aco/yum_autoupdate', "0.6.2"
 
 
